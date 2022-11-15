@@ -15,6 +15,7 @@
     <div class="make-book">
         <form id="form">
             <fieldset>
+                <legend>New book</legend>
                 <input type="text" id="tittle" required placeholder="Tittle">
                 <input type="text" id="author" required placeholder="Author">
                 <input type="number" id="pages" required placeholder="Pages">
@@ -93,27 +94,39 @@ form.addEventListener("submit",fun1);
 
 function myFunction(){
     
-    
     const bookCard = document.createElement("div");
-    bookCard.setAttribute("id","bookCard");
+    bookCard.setAttribute("class","bookCard");
+    
     const pTittle = document.createElement("p");
     pTittle.innerText = myLibrary[myLibrary.length-1].tittle;
    
-
-    const pAuthor = document.createElement("p");
+     const pAuthor = document.createElement("p");
     pAuthor.innerText = `By ${myLibrary[myLibrary.length-1].author}`;
     
     const pPages = document.createElement("p");
     pPages.innerText = `${myLibrary[myLibrary.length-1].pages} pages`;
     
+    const deleteButton = document.createElement("button");
+    deleteButton.setAttribute("type","button");
+    deleteButton.innerText = "Delete book";
+    deleteButton.addEventListener("click",()=>bookCard.remove());
+    deleteButton.addEventListener("click",()=>
+    
+    myLibrary.splice(myLibrary.findIndex(book => book.tittle == pTittle.innerText),1)
+    
+    );
+
+
 
     bookCard.appendChild(pTittle);
     bookCard.appendChild(pAuthor);
     bookCard.appendChild(pPages);
+    bookCard.appendChild(deleteButton);
     
-
     const display= document.getElementById("display");
     display.appendChild(bookCard);
+
+
 
 }
 
