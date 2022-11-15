@@ -105,23 +105,35 @@ function myFunction(){
     
     const pPages = document.createElement("p");
     pPages.innerText = `${myLibrary[myLibrary.length-1].pages} pages`;
-    
+
+    //delete button part
     const deleteButton = document.createElement("button");
     deleteButton.setAttribute("type","button");
     deleteButton.innerText = "Delete book";
     deleteButton.addEventListener("click",()=>bookCard.remove());
     deleteButton.addEventListener("click",()=>
-    
-    myLibrary.splice(myLibrary.findIndex(book => book.tittle == pTittle.innerText),1)
-    
-    );
+    myLibrary.splice(myLibrary.findIndex(book => book.tittle == pTittle.innerText),1));
+    //the line above finds the matching book in the library corresponding to the book added 
+    //in the previous eventlistener
+    //////////////////////////////////////////////////////////////////////////////////////
+    //toggle button part
+     
+    const bReaded = document.createElement("button");
+    bReaded.setAttribute("type","button");
+    bReaded.innerText = myLibrary[myLibrary.length-1].readed ? "Readed" :"Not Readed";
+
+    bReaded.addEventListener("click",()=>{
+        myLibrary[myLibrary.findIndex(book => book.tittle == pTittle.innerText)].toggleReaded();
+        bReaded.innerText = myLibrary[myLibrary.findIndex(book => book.tittle == pTittle.innerText)].readed ? "Readed" :"Not Readed"; 
+    })
 
 
-
+    ///////////////////////////////////////////////////////////////////////////////////////
     bookCard.appendChild(pTittle);
     bookCard.appendChild(pAuthor);
     bookCard.appendChild(pPages);
     bookCard.appendChild(deleteButton);
+    bookCard.appendChild(bReaded);
     
     const display= document.getElementById("display");
     display.appendChild(bookCard);
@@ -133,6 +145,14 @@ function myFunction(){
 form.addEventListener("submit",()=>
     myFunction()
 )
+////////////////////////////////////////////////////////////////////////
+
+Book.prototype.toggleReaded = function (){
+    if (this.readed)
+    this.readed = false;
+    else{this.readed = true;}
+}
+
 
 
 
