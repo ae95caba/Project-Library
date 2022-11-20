@@ -43,21 +43,22 @@
 
     let myLibrary = [];
 
-    function Book(tittle,author,pages,isReaded) {
-    this.tittle = tittle;
-    this.author = author;
-    this.pages = pages;
-    this.readed = isReaded;
-    this.info = function(){
-        return `${tittle} by ${author}, ${pages} pages, ${
-          `${this.readed ? 'readed' : 'not read yet'}`
-        }`
-    }
-  }
-
+    //////////////////
  
-
-  /////////////////////////////////////////////////////////
+    class Book {
+        constructor(tittle,author,pages,isReaded){
+            this.tittle = tittle;
+            this.author = author;
+            this.pages = pages;
+            this.readed = isReaded;
+        }
+        info(){
+            return `${tittle} by ${author}, ${pages} pages, ${
+          `${this.readed ? 'readed' : 'not read yet'}`
+             }`
+        }
+    }
+    
 
 const button = document.getElementById("button");
 const tittle = document.getElementById("tittle");
@@ -65,10 +66,7 @@ const author = document.getElementById("author");
 const pages = document.getElementById("pages");
 const readed = document.getElementById("readed");
 
-
 const pa = document.getElementById("pa");
-
-
 
 function fun1(){
  
@@ -78,19 +76,11 @@ function fun1(){
  author.value="";
  pages.value="";
  
-
 }
-
 
 form.addEventListener("submit",fun1);
 
 ////////////////////////////////////////////////////////////////////////////////
-
-
-
-
-
-
 
 function myFunction(){
     
@@ -152,10 +142,6 @@ Book.prototype.toggleReaded = function (){
     this.readed = false;
     else{this.readed = true;}
 }
-
-
-
-
    </script> 
 </body>
 </html>
