@@ -1,147 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <style>
-        #bookCard{
-            border: 2px solid black;
-        }
-    </style>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <link rel="stylesheet" href="styles.css" />
+    <script src="script.js" defer></script>
+
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-</head>
-<body>
+  </head>
+  <body>
     <div class="make-book">
-        <form id="form">
-            <fieldset>
-                <legend>New book</legend>
-                <input type="text" id="tittle" required placeholder="Tittle">
-                <input type="text" id="author" required placeholder="Author">
-                <input type="number" id="pages" required placeholder="Pages">
-                
-                <label for="readed">Have you read it?</label>
-                <input type="checkbox" id="readed"  >
-                
-            </fieldset>
-            <button  id="button"  >Click me</button>
-         </form>
+      <form id="form">
+        <fieldset>
+          <legend>New book</legend>
+          <input type="text" id="tittle" placeholder="Tittle" />
+          <p class="error"></p>
+          <input type="text" id="author" placeholder="Author" />
+          <p class="error"></p>
+          <input type="number" id="pages" placeholder="Pages" />
+          <p class="error"></p>
+
+          <label for="readed">Have you read it?</label>
+          <input type="checkbox" id="readed" />
+        </fieldset>
+        <button id="button">Click me</button>
+      </form>
     </div>
-    <div id="display">
-
-        
-
-    </div>
-
-   <script>
-    const form = document.getElementById("form");
-    form.addEventListener("submit",function(e){
-        e.preventDefault();
-       
-        
-    });
-
-    let myLibrary = [];
-
-    //////////////////
- 
-    class Book {
-        constructor(tittle,author,pages,isReaded){
-            this.tittle = tittle;
-            this.author = author;
-            this.pages = pages;
-            this.readed = isReaded;
-        }
-        info(){
-            return `${tittle} by ${author}, ${pages} pages, ${
-          `${this.readed ? 'readed' : 'not read yet'}`
-             }`
-        }
-    }
-    
-
-const button = document.getElementById("button");
-const tittle = document.getElementById("tittle");
-const author = document.getElementById("author");
-const pages = document.getElementById("pages");
-const readed = document.getElementById("readed");
-
-const pa = document.getElementById("pa");
-
-function fun1(){
- 
- let book = new Book(tittle.value,author.value,pages.value,readed.checked);
- myLibrary.push(book);
- tittle.value = "";
- author.value="";
- pages.value="";
- 
-}
-
-form.addEventListener("submit",fun1);
-
-////////////////////////////////////////////////////////////////////////////////
-
-function myFunction(){
-    
-    const bookCard = document.createElement("div");
-    bookCard.setAttribute("class","bookCard");
-    
-    const pTittle = document.createElement("p");
-    pTittle.innerText = myLibrary[myLibrary.length-1].tittle;
-   
-     const pAuthor = document.createElement("p");
-    pAuthor.innerText = `By ${myLibrary[myLibrary.length-1].author}`;
-    
-    const pPages = document.createElement("p");
-    pPages.innerText = `${myLibrary[myLibrary.length-1].pages} pages`;
-
-    //delete button part
-    const deleteButton = document.createElement("button");
-    deleteButton.setAttribute("type","button");
-    deleteButton.innerText = "Delete book";
-    deleteButton.addEventListener("click",()=>bookCard.remove());
-    deleteButton.addEventListener("click",()=>
-    myLibrary.splice(myLibrary.findIndex(book => book.tittle == pTittle.innerText),1));
-    //the line above finds the matching book in the library corresponding to the book added 
-    //in the previous eventlistener
-    //////////////////////////////////////////////////////////////////////////////////////
-    //toggle button part
-     
-    const bReaded = document.createElement("button");
-    bReaded.setAttribute("type","button");
-    bReaded.innerText = myLibrary[myLibrary.length-1].readed ? "Readed" :"Not Readed";
-
-    bReaded.addEventListener("click",()=>{
-        myLibrary[myLibrary.findIndex(book => book.tittle == pTittle.innerText)].toggleReaded();
-        bReaded.innerText = myLibrary[myLibrary.findIndex(book => book.tittle == pTittle.innerText)].readed ? "Readed" :"Not Readed"; 
-    })
-
-
-    ///////////////////////////////////////////////////////////////////////////////////////
-    bookCard.appendChild(pTittle);
-    bookCard.appendChild(pAuthor);
-    bookCard.appendChild(pPages);
-    bookCard.appendChild(deleteButton);
-    bookCard.appendChild(bReaded);
-    
-    const display= document.getElementById("display");
-    display.appendChild(bookCard);
-
-
-
-}
-
-form.addEventListener("submit",()=>
-    myFunction()
-)
-////////////////////////////////////////////////////////////////////////
-
-Book.prototype.toggleReaded = function (){
-    if (this.readed)
-    this.readed = false;
-    else{this.readed = true;}
-}
-   </script> 
-</body>
+    <div id="display"></div>
+  </body>
 </html>
